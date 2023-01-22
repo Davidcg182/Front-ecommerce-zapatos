@@ -3,7 +3,13 @@ const initialState = {
     zapas: [],
     allZapas: [],
     detail: [],
-    cart: []
+    cart: [],
+    users: [],
+    user: {},
+    userLog: {},
+    reviews: [],
+    orders: [],
+    order: {},
 }
 
 function rootReducer(state = initialState, action) {
@@ -50,6 +56,64 @@ function rootReducer(state = initialState, action) {
             return {
                 ...state,
                 cart: state.cart.filter(e => e._id !== action.payload)
+            };
+
+        case "CREATE_USER":
+            return {
+                ...state,
+                // users: state.users.push(action.payload)
+                users: [...state.users, action.payload]
+            };
+        case "GET_USER":
+            return {
+                ...state,
+                users: action.payload
+            };
+        case "LOG_USER":
+            return {
+                ...state,
+                userLog: { userInfo: action.payload }
+            };
+        case "ERR_LOGEO":
+            return {
+                ...state,
+                userLog: { error: action.payload }
+            };
+        case "UPDATE_USER":
+            return {
+                ...state
+            };
+        case "UPDATE_PRODUCT":
+            return {
+                ...state
+            };
+        case "GET_REVIEWS":
+            return {
+                ...state,
+                reviews: action.payload
+            };
+        case "GET_ORDERS":
+            return {
+                ...state,
+                orders: action.payload
+            };
+        case "UPDATE_ORDER":
+            return {
+                ...state
+            };
+        case "GET_SINGLE_ORDER":
+            return {
+                ...state,
+                order: action.payload
+            };
+        case "SINGLE_USER":
+            return {
+                ...state,
+                user: action.payload
+            };
+        case "UPDATE_USER":
+            return {
+                ...state,
             };
 
         default:

@@ -48,7 +48,6 @@ export default function Home(){
             {/* <Filters /> */}
             <Carrusel />
 
-            <button><Link  to= '/Crear'>Cargar Zapas</Link></button>   
                
 
 

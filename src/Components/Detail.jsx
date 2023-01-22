@@ -25,7 +25,6 @@ export default function Details() {
    const dispatch = useDispatch()
    const zapa = useSelector(state => state.detail)
 
-
    useState(() => {
       dispatch(getZapaById(id))
    }, [id])
