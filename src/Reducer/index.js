@@ -2,8 +2,9 @@
 const initialState = {
     zapas: [],
     allZapas: [],
-    detail: [],
+    detail: {},
     cart: [],
+    favorite: [],
     users: [],
     user: {},
     userLog: {},
@@ -46,10 +47,13 @@ function rootReducer(state = initialState, action) {
             };
 
         case "ADD_TO_CART":
-            const item = action.payload;
+            const item = state.cart.find((item) => item._id === action.payload._id ? true : false);
+
             return {
                 ...state,
-                cart: [...state.cart, item]
+                cart: item ? state.cart.map((item) =>
+                    item._id === action.payload._id ? { ...item, qty: item.qty + 1 } : item
+                ) : [...state.cart, { ...action.payload, qty: 1 }]
             };
 
         case "REMOVE_TO_CART":
@@ -58,6 +62,27 @@ function rootReducer(state = initialState, action) {
                 cart: state.cart.filter(e => e._id !== action.payload)
             };
 
+        case "ADD_TO_FAV":
+            const item2 = state.favorite.find((item) => item._id === action.payload._id ? true : false);
+
+            return {
+                ...state,
+                favorite: item2 ? state.favorite.map((item) =>
+                    item._id === action.payload._id ? { ...item, qty: item.qty + 1 } : item
+                ) : [...state.favorite, { ...action.payload, qty: 1 }]
+            };
+
+        case "REMOVE_TO_FAV":
+            return {
+                ...state,
+                favorite: state.favorite.filter(e => e._id !== action.payload)
+            };
+
+        case "POST_PRODUCT":
+            return {
+                ...state,
+                detail: action.payload
+            };
         case "CREATE_USER":
             return {
                 ...state,

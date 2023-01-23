@@ -36,6 +36,9 @@ export const UserPerfil = () => {
                     <button>Perfil admin</button>
                 </Link>
             }
+            <Link to={`/home`}>
+                <button>a comprar!</button>
+            </Link>
             <Link to={`/perfilusuario/${user._id}/favoritos`}>
                 <button>favoritos</button>
             </Link>

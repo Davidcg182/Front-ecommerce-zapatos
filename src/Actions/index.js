@@ -9,7 +9,7 @@ export function getZapas() {
             payload: json.data
         })
     }
-}
+};
 
 export function getModeloZapas(modelo) {
     return async function (dispatch) {
@@ -25,7 +25,7 @@ export function getModeloZapas(modelo) {
         }
 
     }
-}
+};
 
 export function getZapaById(id) {
     return async function (dispatch) {
@@ -39,22 +39,21 @@ export function getZapaById(id) {
             console.log(error, 'err')
         }
     }
-}
+};
 
 export function getFilters({ talla, precio, actividad, order }) {
     return async function (dispatch) {
-        const filters = await axios.get(`http://localhost:3001/productos/filtros?talla=${talla}&&precio=${precio}&&actividad=${actividad}&&order=${order}`)
+        var filters = await axios.get(`http://localhost:3001/productos/filtros?talla=${talla}&&precio=${precio}&&actividad=${actividad}&&order=${order}`)
         return dispatch({
             type: "GET_FILTERS",
             payload: filters.data
         })
     }
-}
+};
 
 export function postProduct(payload) {
     return async function (dispatch) {
         const response = await axios.post('http://localhost:3001/productos/zapatillas', payload)
-        //console.log(response)
         return dispatch({
             type: "POST_PRODUCT",
             response
@@ -63,7 +62,7 @@ export function postProduct(payload) {
 };
 
 export function addToCart(id) {
-    return async function (dispatch, getState) {
+    return async function (dispatch) {
         const product = await axios.get(`http://localhost:3001/productos/zapatillas/${id}`);
         dispatch({
             type: "ADD_TO_CART",
@@ -71,17 +70,36 @@ export function addToCart(id) {
 
 
         })
-        localStorage.setItem("cart", JSON.stringify(getState()))
     }
 };
 
 export function removeToCart(id) {
-    return async function (dispatch, getState) {
+    return async function (dispatch) {
         dispatch({
             type: "REMOVE_TO_CART",
             payload: id
         })
-        localStorage.setItem("cart", JSON.stringify(getState()))
+    }
+};
+
+export function addToFav(id) {
+    return async function (dispatch) {
+        const product = await axios.get(`http://localhost:3001/productos/zapatillas/${id}`);
+        dispatch({
+            type: "ADD_TO_FAV",
+            payload: product.data,
+
+
+        })
+    }
+};
+
+export function removeToFav(id) {
+    return async function (dispatch) {
+        dispatch({
+            type: "REMOVE_TO_FAV",
+            payload: id
+        })
     }
 };
 
@@ -106,21 +124,42 @@ export function getUsers() {
     }
 };
 
-// export function logUser (payload) {
-//     return async function (dispatch) {
-//         const login = await axios.post(`http://localhost:3001/usuarios/login`, payload)
-//         dispatch({
-//             type: "LOG_USER",
-//             login
-//         })
-//     }
-// };
+export function singleUser(id) {
+    return async function (dispatch) {
+        try {
+            const { data } = await axios.get(`http://localhost:3001/usuarios/${id}`)
+            console.log(data)
+            dispatch({
+                type: "SINGLE_USER",
+                payload: data
+            })
+        } catch (error) {
+            console.log(error)
+        }
+    }
+};
+
+export function updateUser({ _id, data }) {
+
+    return async function (dispatch) {
+        try {
+            const user = await axios.put(`http://localhost:3001/usuarios/${_id}`, data)
+
+            dispatch({
+                type: "UPDATE_USER",
+                payload: user.data
+            })
+        } catch (error) {
+            console.log(error)
+        }
+    }
+};
 
 export function logUser(email, contraseña) {
     return async function (dispatch) {
         try {
             const { data } = await axios.post(`http://localhost:3001/usuarios/login`, { email, contraseña })
-            console.log(data)
+            //console.log(data)
             dispatch({
                 type: "LOG_USER",
                 payload: data
@@ -176,7 +215,6 @@ export function updateUserEstado({ _id, estado1 }) {
 };
 
 export function updateProduct({ _id, actividad, color, imagenes, marca, modelo, precio, talle, descripcion, inventario, estado, oferta }) {
-
     const payload = {
         actividad,
         color,
@@ -190,11 +228,9 @@ export function updateProduct({ _id, actividad, color, imagenes, marca, modelo, 
         estado,
         oferta,
     };
-   // console.log(payload)
     return async function (dispatch) {
         try {
             const { data } = await axios.put(`http://localhost:3001/productos/zapatillas/${_id}`, payload)
-            //console.log(data)
             dispatch({
                 type: "UPDATE_PRODUCT",
                 payload: data
@@ -202,7 +238,7 @@ export function updateProduct({ _id, actividad, color, imagenes, marca, modelo, 
         } catch (error) {
             console.log(error)
         }
-    }
+    };
 };
 
 export function getReviews() {
@@ -250,6 +286,7 @@ export function getSingleOrder(id) {
     return async function (dispatch) {
         try {
             let order = await axios.get(`http://localhost:3001/pedido/${id}`)
+            console.log(order.data)
             return dispatch({
                 type: 'GET_SINGLE_ORDER',
                 payload: order.data
@@ -258,35 +295,17 @@ export function getSingleOrder(id) {
             console.log(error, 'err')
         }
     }
-}
-
-export function singleUser(id) {
-    return async function (dispatch) {
-        try {
-            const { data } = await axios.get(`http://localhost:3001/usuarios/${id}`)
-            console.log(data)
-            dispatch({
-                type: "SINGLE_USER",
-                payload: data
-            })
-        } catch (error) {
-            console.log(error)
-        }
-    }
 };
 
-export function updateUser({ _id, data }) {
-
-    return async function (dispatch) {
-        try {
-            const user = await axios.put(`http://localhost:3001/usuarios/${_id}`, data)
-
-            dispatch({
-                type: "UPDATE_USER",
-                payload: user.data
-            })
-        } catch (error) {
-            console.log(error)
-        }
-    }
-};
+//---------------------------------------------------
+// export function payOneZapa(zapatilla) {
+//     return async function (dispatch){
+//         console.log("ESTA ES MI ZAPA ", zapatilla)
+//         const res = await axios.post('http://localhost:3001/payment', zapatilla)
+//         // window.location.href = res.data.response.body.init_point;
+//         return dispatch({
+//             type: "POST_PAYMENT",
+//             payload: res
+//         });
+//     }
+// }

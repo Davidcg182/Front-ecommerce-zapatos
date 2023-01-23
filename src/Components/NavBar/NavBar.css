@@ -6,7 +6,10 @@
 
 }
 .btnCart{
-    margin-right: 0.5cm;
+    margin-right: 1.5cm;
+}
+.btnFav{
+    margin-right: 1.5cm;
 }
 .btnLogin{
     text-decoration: none;

@@ -13,7 +13,7 @@ export default function Carrusel() {
     
     <Carousel variant="dark">
       <Carousel.Item >
-      <Link to='/zapatillas/63b622352bdf1dfe9c9c3ba0'>
+      <Link to='/zapatillas/63c59f1b822019881ceef8ce'>
         <img
           className="carru"
           src={card01}
@@ -23,7 +23,7 @@ export default function Carrusel() {
         
       </Carousel.Item>
       <Carousel.Item>
-        <Link to='/zapatillas/63b624422bdf1dfe9c9d175e'>
+        <Link to='/zapatillas/63c59f1b822019881ceef8db'>
         <img
           className="carru"
           src={card02}
@@ -33,7 +33,7 @@ export default function Carrusel() {
         
       </Carousel.Item>
       <Carousel.Item>
-      <Link to='/zapatillas/63b626102bdf1dfe9c9ddce0'>
+      <Link to='/zapatillas/63c59f1b822019881ceef8e8'>
         <img
           className="carru"
           src={card03}
@@ -44,7 +44,7 @@ export default function Carrusel() {
       </Carousel.Item>
 
       <Carousel.Item>
-      <Link to='/zapatillas/63b6273a2bdf1dfe9c9e565a'>
+      <Link to='/zapatillas/63c59f1b822019881ceef8fb'>
         <img
           className="carru"
           src={card04}

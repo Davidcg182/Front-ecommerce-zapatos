@@ -2,13 +2,14 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import './LandingPage.css'
-
+import fondo from '../imagenes/quimeyPesado.jpg'
 export default function LandingPage(){
     return(
         
 
         <div 
         className='landing'
+    
         >
             
             

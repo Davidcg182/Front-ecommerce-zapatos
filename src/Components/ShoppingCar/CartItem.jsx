@@ -72,7 +72,7 @@ export const CartItem = ({ item }) => {
                         <MDBIcon fas icon="minus" />
                       </MDBBtn>
 
-                      <MDBInput min={0} defaultValue={1} type="number" size="sm" />
+                      <MDBInput min={0} defaultValue={item.qty} type="number" size="sm" />
 
                       <MDBBtn color="link" className="px-2">
                         <MDBIcon fas icon="plus" />
@@ -84,7 +84,7 @@ export const CartItem = ({ item }) => {
                       </MDBTypography>
                     </MDBCol>
                     <MDBCol md="1" lg="1" xl="1" className="text-end">
-                      <Button color='light' onClick={handleDelete}>X</Button>
+                      <Button color='light' onClick={handleDelete}>Quitar estos productos</Button>
                     </MDBCol>
                   </MDBRow>
                 </MDBCardBody>

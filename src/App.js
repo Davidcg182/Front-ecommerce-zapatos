@@ -6,8 +6,11 @@ import Formulario from './Components/Formulario/Formulario'
 import LoginGoogle from './Components/Login/LoginGoogle';
 import { LoginGeneral } from './Components/Login/LoginGeneral';
 import Productos from './Components/Productos/Productos';
+import Favorito from './Components/Favoritos/Favoritos';
 import UploadImg from "./Components/Admin/uploadImg";
 import ShopCart from './Components/ShoppingCar/ShopCart';
+import Contenido from './Components/ChatBot/ChatBot';
+import Ofertas from './Components/Ofertas/Ofertas';
 import CreateUserForm from './Components/Login/SigIn';
 import { UserPerfil } from './Components/UserPerfil/UserPerfil';
 import UserDashboard from './Components/Dashboard/UsersDashboard/UsersDashboard';
@@ -19,6 +22,7 @@ import Dashboard from './Components/Dashboard/Dashboard';
 import { Favoritos } from './Components/UserPerfil/Favoritos';
 import { OrdersUser } from './Components/UserPerfil/OrdersUser';
 import { UpdateUser } from './Components/UserPerfil/UpdateUser';
+
 
 function App() {
   return (
@@ -37,6 +41,7 @@ function App() {
           <Route exact path='/perfilusuario' element={<UserPerfil />}></Route>
           <Route exact path='/login' element={<LoginGeneral />}></Route>
           <Route exact path='/crearusuario' element={<CreateUserForm />}></Route>
+          <Route Route exact path='/favoritos' element={<Favorito />}></Route>
           <Route Route exact path='/compras' element={<ShopCart />}></Route>
           <Route exact path='/login/google' element={<LoginGoogle />} />
           <Route exact path='/' element={<LandingPage />} />
@@ -45,7 +50,9 @@ function App() {
           <Route exact path='/crear' element={<Formulario />} />
           <Route exact path='/zapatillas/:id' element={<Details />} />
           <Route path='/zapatillas' element={<Productos />} />
+          <Route path='/zapatillas/ofertas' element={<Ofertas />} />
         </Routes>
+        <Contenido />
       </div>
     </BrowserRouter>
   );

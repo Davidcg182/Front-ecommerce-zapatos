@@ -7,12 +7,13 @@ export const DetailsOrder = () => {
 
     const dispatch = useDispatch();
     const {id} = useParams();
+    const order = useSelector(state => state.order);
 
     useEffect(() => {
+        console.log(id)
         dispatch(getSingleOrder(id))
-    });
+    }, [dispatch]);
 
-    const order = useSelector(state => state.order);
 
     return (
         <div>
@@ -32,10 +33,10 @@ export const DetailsOrder = () => {
                 )
             })};
             <h3>Informacion de envio</h3>
-            <p>Direccion: {order.direccionEntrega.direccion}</p>
-            <p>Ciudad: {order.direccionEntrega.ciudad}</p>
-            <p>Codigo postal: {order.direccionEntrega.codigoPostal}</p>
-            <p>Pais: {order.direccionEntrega.pais}</p>
+            <p>Direccion: {order.direccionEntrega?.direccion}</p>
+            <p>Ciudad: {order.direccionEntrega?.ciudad}</p>
+            <p>Codigo postal: {order.direccionEntrega?.codigoPostal}</p>
+            <p>Pais: {order.direccionEntrega?.pais}</p>
             <hr/>
             <h3>Precio total: {order.precioTotal}</h3>
         </div>

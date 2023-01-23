@@ -21,13 +21,13 @@ export function BarUsersOrders() {
   array.forEach(e => {
     ordersData.push({
       usuario: e,
-      cantidad: 0
+      gastos: 0
     })
   })
   orders.forEach(e => {
     ordersData.forEach(a => {
       if (a.usuario === e.usuario) {
-        a.cantidad = a.cantidad + Number(e.precioTotal)
+        a.gastos = a.gastos + Number(e.precioTotal)
       }
     })
   })
@@ -40,7 +40,7 @@ export function BarUsersOrders() {
         <h1>Usuarios vs total de compras</h1>
         <ResponsiveBar
           data={ordersData}
-          keys={["cantidad"]}
+          keys={["gastos"]}
           indexBy="usuario"
           margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
           padding={0.4}

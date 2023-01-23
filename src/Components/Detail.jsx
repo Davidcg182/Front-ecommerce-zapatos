@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
@@ -6,6 +7,11 @@ import Carousel from 'react-bootstrap/Carousel';
 import NavBar from './NavBar/NavBar';
 import Button from 'react-bootstrap/Button';
 import { addToCart } from '../Actions';
+import { payOneZapa } from '../Actions';
+import Footer from './Footer/Footer';
+import swal from 'sweetalert';
+import { addToFav, removeToFav } from '../Actions';
+
 
 
 import publi01 from './imagenes/detalleB01.png';
@@ -13,10 +19,12 @@ import publi02 from './imagenes/detalleB02.png';
 import publi03 from './imagenes/detalleB03.png';
 import publi04 from './imagenes/detalleB04.png';
 
+// CHEQUEO DE DATO MERGE
 
 import './CSS/Detail.css'
 import './CSS/Home.css'
 import CarruselPromo from './Carrusels/CarruselPromo';
+
 
 
 export default function Details() {
@@ -24,6 +32,7 @@ export default function Details() {
    const { id } = useParams()
    const dispatch = useDispatch()
    const zapa = useSelector(state => state.detail)
+   // console.log("ZAPA," , zapa);
 
    useState(() => {
       dispatch(getZapaById(id))
@@ -34,7 +43,19 @@ export default function Details() {
       e.preventDefault();
       //console.log(id)
       dispatch(addToCart(id))
-      window.alert("Producto añadido al carrito exitosamente!");
+      swal({
+         icon: "success",
+         title: 'Producto añadido con éxito!'
+       });
+   }
+   const handleToFavorite = (e) => {
+      e.preventDefault();
+      //console.log(id)
+      dispatch(addToFav(id))
+      swal({
+         icon: "success",
+         title: 'Producto agregado a la lista de favoritos!'
+       });
    }
 
    return (
@@ -100,9 +121,11 @@ export default function Details() {
                            </select>
                         </h5>
                         <div class="action">
+                           <Button value='add' className='btnCart' variant="primary" onClick={handleToFavorite}>❤️</Button>
                            <Button variant="primary">Comprar</Button>
                            <Button value='add' className='btnCart' variant="primary" onClick={handleToCart}
                            >Añadir al carrito</Button>
+                                                                                                               
 
                         </div>
                      </div>
@@ -157,6 +180,7 @@ export default function Details() {
       </Carousel.Item>
     </Carousel> */}
          </div>
+         <Footer/>  
       </div>
 
    );
