@@ -9,6 +9,10 @@ import { Auth0Provider } from "@auth0/auth0-react";
 import 'bootstrap/dist/css/bootstrap.css'; 
 import 'react-bootstrap-range-slider/dist/react-bootstrap-range-slider.css';
 import { render } from "react-dom";
+import axios from 'axios';
+
+//axios.defaults.baseURL = "http://localhost:3001/";
+axios.defaults.baseURL = "https://henry-pf-backend-production.up.railway.app/"
 
 
 render(
