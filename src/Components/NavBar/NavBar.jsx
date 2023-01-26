@@ -27,7 +27,7 @@ export default function NavBar() {
   const [haySocket, setHaySocket] = useState(false);
 
   useEffect(() => {
-    setSocket(io("http://localhost:5000"));
+    setSocket(io("https://henry-pf-backend-production.up.railway.app"));
     setHaySocket(true);
   }, []);
   useEffect(() => {
