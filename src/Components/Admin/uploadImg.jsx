@@ -79,7 +79,7 @@ export default function UploadImg() {
   function uploadSingleImage(base64) {
     setLoading(true);
     axios
-      .post("http://henry-pf-backend-production.up.railway.app/uploadImage", { image: base64 })
+      .post("https://henry-pf-backend-production.up.railway.app/uploadImage", { image: base64 })
       // .post("http://localhost:3001/uploadImage", { image: base64 })
       .then((res) => {
         setUrl(res.data);
@@ -102,7 +102,7 @@ export default function UploadImg() {
   function uploadMultipleImages(images) {
     setLoading(true);
     axios
-      .post("http://henry-pf-backend-production.up.railway.app/uploadMultipleImages", { images })
+      .post("https://henry-pf-backend-production.up.railway.app/uploadMultipleImages", { images })
       //.post("http://localhost:3001/uploadMultipleImages", { images })
       .then((res) => {
         setUrl(res.data);
