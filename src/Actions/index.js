@@ -3,8 +3,9 @@ import swal from 'sweetalert';
 
 export function getZapas() {
     return async function (dispatch) {
-        var json = await axios.get('productos/zapatillas')
-
+        //var json = await axios.get('productos/zapatillas')
+        var json = await axios({ url: 'productos/zapatillas', baseURL: 'http://henry-pf-backend-production.up.railway.app/' })
+        
         return dispatch({
             type: 'GET_ZAPAS',
             payload: json.data
