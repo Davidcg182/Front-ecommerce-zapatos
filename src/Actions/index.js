@@ -1,10 +1,11 @@
 import axios from 'axios';
 import swal from 'sweetalert';
 
+const URL = "http://henry-pf-backend-production.up.railway.app/"
+
 export function getZapas() {
     return async function (dispatch) {
-        //var json = await axios.get('productos/zapatillas')
-        var json = await axios({ url: 'productos/zapatillas', baseURL: 'http://henry-pf-backend-production.up.railway.app/' })
+        var json = await axios.get(`${URL}productos/zapatillas`)
         
         return dispatch({
             type: 'GET_ZAPAS',
