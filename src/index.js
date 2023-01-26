@@ -14,12 +14,11 @@ import axios from "axios"
 //axios.defaults.baseURL = "http://localhost:3001/"
 axios.defaults.baseURL = "https://henry-pf-backend-production.up.railway.app/"
 
-
 render(
 <Provider store={store}  >
 <React.StrictMode>
   <Auth0Provider
-  domain="ndev-3ossxtz5x7gdz7wj.us.auth0.com"
+  domain="dev-3ossxtz5x7gdz7wj.us.auth0.com"
   clientId="TgHHiXRYXfAsLGiykaAqt5reE43gZir6"
   redirectUri={window.location.origin }
   > 
