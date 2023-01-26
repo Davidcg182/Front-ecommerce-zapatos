@@ -5,6 +5,9 @@ import { getOrders } from "../../../Actions";
 import { updateOrder } from "../../../Actions";
 import BarUsersOrders from "../Charts/BarUserOrders";
 import { Link } from "react-router-dom";
+import SidebarDashboard from "../SidebarDashboard/SidebarDashboard";
+
+import '../Dashboard.css'
 
 export default function OrderDashboard() {
 
@@ -12,7 +15,6 @@ export default function OrderDashboard() {
     { field: "_id", headerName: "ID" },
     { field: "usuario", headerName: "Id usuario" },
     { field: "metodoDePago", headerName: "metodoDePago" },
-    { field: "precioEnvio", headerName: "precioEnvio", type: 'number', editable: true },
     { field: "estadoEntrega", headerName: "estadoEntrega", type: 'boolean', editable: true },
     { field: "precioTotal", headerName: "precioTotal"},
     {
@@ -21,6 +23,7 @@ export default function OrderDashboard() {
         return (
           <>
             <button
+            className="actualizar"
               variant="contained"
               color="primary"
               onClick={(event) => {
@@ -63,8 +66,8 @@ export default function OrderDashboard() {
   const handleUpdateOrder = (event, cellValues) => {
     const _id = cellValues.row._id;
     const estadoEntrega = cellValues.row.estadoEntrega;
-    const precioEnvio = cellValues.row.precioEnvio;
-    dispatch(updateOrder({ _id, estadoEntrega, precioEnvio }));
+    dispatch(updateOrder({ _id, estadoEntrega }));
+    window.location.reload();
   };
 
   const handleCellClick = (param, event) => {
@@ -75,9 +78,9 @@ export default function OrderDashboard() {
     event.stopPropagation();
   }
   return (
-    <div >
-      <div >
-        {/* <SidebarDashboard /> */}
+    <div className='estrucUserDash'>
+        <SidebarDashboard />
+      <div className='listadoUsers'>
         {allorders?.length > 0 ? (
           <>
             <h1>Ordenes de compra</h1>
@@ -92,6 +95,7 @@ export default function OrderDashboard() {
             </div>
           </>
         ) : null}
+
         <div>
           <BarUsersOrders />
         </div>

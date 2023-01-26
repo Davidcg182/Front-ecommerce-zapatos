@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import { useDispatch, useSelector } from 'react-redux';
-//import SidebarDashboard from "../SidebarDashboard/SidebarDashboard.jsx";
+import SidebarDashboard from "../SidebarDashboard/SidebarDashboard.jsx";
 import { getReviews } from '../../../Actions/index.js';
+import { removeReview } from '../../../Actions/index.js';
+
 
 export default function ReviewsDashboard() {
 
@@ -24,22 +26,10 @@ export default function ReviewsDashboard() {
               variant="contained"
               color="primary"
               onClick={(event) => {
-                //handleClick(event, cellValues);
+              handleClick(event, cellValues);
               }}
             >
-              Desactivar
-            </button>
-          )
-        } else {
-          return (
-            <button
-              variant="contained"
-              color="primary"
-              onClick={(event) => {
-                //handleClick(event, cellValues);
-              }}
-            >
-              Aceptar
+              Eliminar
             </button>
           )
         }
@@ -53,12 +43,11 @@ export default function ReviewsDashboard() {
     dispatch(getReviews())
   }, []);
 
-  // const handleClick = (event, cellValues) => {
-  //   console.log(cellValues.row)
-  //   const id = cellValues.row.id
-  //   const status = cellValues.row.status
-  //   dispatch(reviewActive({ id, status }))
-  // }
+  const handleClick = (event, cellValues) => {
+    const id = cellValues.row._id;
+    dispatch(removeReview(id));
+    window.location.reload();
+  }
 
   const handleCellClick = (param, event) => {
     event.stopPropagation();
@@ -69,13 +58,13 @@ export default function ReviewsDashboard() {
   };
 
   return (
-    <div>
-      <div>
-        {/* <SidebarDashboard /> */}
+    <div className='estrucUserDash'>
+        <SidebarDashboard />
+      <div className='listadoUsers'>
         {reviews?.length > 0 ? (
           <>
             <h1>TODAS LAS RESEÑAS</h1>
-            <div style={{ height: 450, width: '100%' }}>
+            <div style={{ height: 750, width: '100%' }}>
               <DataGrid
                 checkboxSelection
                 onCellClick={handleCellClick}

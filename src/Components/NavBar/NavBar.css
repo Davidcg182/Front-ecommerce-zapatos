@@ -1,23 +1,105 @@
 .lhome{
-    height: 200px;
+    height: 500px;
     position: relative;
     left: 25px;
     top: 20px
 
 }
 .btnCart{
-    margin-right: 1.5cm;
+    margin-right: 0.7cm;
 }
 .btnFav{
-    margin-right: 1.5cm;
+    margin-right: 2cm;
+    padding: 5px;
 }
-.btnLogin{
-    text-decoration: none;
-    margin-left: 5px;
-}
-.btnLogin:hover{
-    transition: 0.2s;
-    border: none;
-    background:rgb(37, 78, 212);
+.icons {
+    display: flex;
+    align-items: center;
+  }
+.icon {
+    margin-left: 50px;
+    cursor: pointer;
+    position: relative;
+  }
+.iconImg {
+    width: 20px;
+    height: 20px;
+  }
+.counter {
+    width: 5px;
+    height: 5px;
+    background-color: red;
+    border-radius: 50%;
+    padding: 5px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    
+    top: -5px;
+    right: -5px;
+  }
+.nButton {
+    width: 100%;
+    padding: 5px;
+    margin-top: 10px;
     color: white;
+    justify-content: center;
+    background-color: rgb(147, 147, 194);
+  }
+  
+
+.notifications {
+    z-index: 9;
+    position: absolute;
+    top: 50px;
+    right: 0;
+    background-color: rgb(101, 131, 181);
+    color: black;
+    font-weight: 300;
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    width: 350px;
+    border-radius: 5px;
+  }
+  
+.notification {
+    color: white ;
+    padding: 9px;
+    font-size: 18px;
+    
+  }
+.navbar {
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    color: white;
+    position: relative;
+  }
+
+.n{
+  border:2px;
+  border-style: solid;
+  border-color: rgb(0, 0, 0);
+  border-radius: 3px;
+  margin: 5px;
+  background-color: rgb(81, 103, 142);
+  padding: 5px;
+}
+
+.btnProductos{
+    margin-top: 0.5cm;
+    margin-left: 5cm;
+    height: 1cm;
+}
+.btnOfertas{
+  margin-left: 2cm;
+}
+.btnTitle{
+  margin-left: 0.5cm;
+}
+.logo{
+  padding: 2px;
 }

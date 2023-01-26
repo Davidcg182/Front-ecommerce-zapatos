@@ -22,18 +22,67 @@ import Dashboard from './Components/Dashboard/Dashboard';
 import { Favoritos } from './Components/UserPerfil/Favoritos';
 import { OrdersUser } from './Components/UserPerfil/OrdersUser';
 import { UpdateUser } from './Components/UserPerfil/UpdateUser';
+import SendNotification from "./Components/Dashboard/SendNotification/SendNotification"
+import { ProductosRender } from './Components/Productos/Productos render';
+import { Checkout } from './Components/Checkout/Checkout';
+import { Order } from './Components/Orden/Orden';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { createUser } from './Actions';
+import { useAuth0 } from '@auth0/auth0-react';
+import ReviewForm from './Components/Reviews/ReviewForm';
+import NavBar from './Components/NavBar/NavBar';
+
+import './App.css'
+import Footer from './Components/Footer/Footer';
 
 
 function App() {
+
+  const dispatch = useDispatch();
+  const logUser = useSelector(state => state.user);
+  const { user } = useAuth0();
+  useEffect(() => {
+   user && dispatch(createUser({ email: user?.email, nombre: user?.given_name, contraseña: 123456 }))
+  }, [user]);
+
+  useEffect(() => {
+    const dataUser = JSON.parse(window.localStorage.getItem("user"));
+    const cart = window.localStorage.getItem("cart")
+      ? JSON.parse(window.localStorage.getItem("cart"))
+      : null;
+
+    //----------------------------------------
+
+    if (!(cart === null)) {
+      if (cart.amount) {
+        dispatch(updateRedux([cart]));
+      } else {
+        const savecart = [];
+        Object.entries(cart).map(e => {
+          savecart.push(e[1])
+        })
+        dispatch(updateRedux(savecart));
+      }
+    }
+    !dataUser
+      ? dispatch(postLoginUserAuth0({ email: user?.email, name: user?.name }))
+      : dispatch(
+          postLoginUserAuth0({ email: dataUser.email, name: dataUser.name })
+        );
+  }, [user]);
+
   return (
     <BrowserRouter>
-      <div>
+      <div className='fondoFootShoop'>
+        <NavBar/>
         <Routes>
           <Route exact path='/detalleorden/:id' element={<DetailsOrder />} ></Route>
           <Route exact path='/tablerordenes' element={<OrderDashboard />} ></Route>
           <Route exact path='/tablerorevisiones' element={<ReviewsDashboard />} ></Route>
           <Route exact path='/tableroproductos' element={<ProductDashboard />} ></Route>
           <Route exact path='/tablerousuarios' element={<UserDashboard />} ></Route>
+          <Route exact path='/sendNotification' element={<SendNotification />} ></Route>
           <Route exact path='/perfiladmin' element={<Dashboard />}></Route>
           <Route exact path='/perfilusuario/:id/favoritos' element={<Favoritos />}></Route>
           <Route exact path='/perfilusuario/:id/modificarinfo' element={<UpdateUser />}></Route>
@@ -45,14 +94,16 @@ function App() {
           <Route Route exact path='/compras' element={<ShopCart />}></Route>
           <Route exact path='/login/google' element={<LoginGoogle />} />
           <Route exact path='/' element={<LandingPage />} />
-          <Route exact path='/uploadImg' element={<UploadImg />} />
+          <Route exact path='/crear' element={<UploadImg />} />
           <Route path='/Home' element={<Home />} />
-          <Route exact path='/crear' element={<Formulario />} />
           <Route exact path='/zapatillas/:id' element={<Details />} />
-          <Route path='/zapatillas' element={<Productos />} />
+          <Route path='/zapatillas' element={<ProductosRender />} />
           <Route path='/zapatillas/ofertas' element={<Ofertas />} />
+          <Route path='/Checkout' element={<Checkout />} />
+          <Route path='/reseña/:id' element={<ReviewForm />} />
         </Routes>
         <Contenido />
+      <Footer />
       </div>
     </BrowserRouter>
   );

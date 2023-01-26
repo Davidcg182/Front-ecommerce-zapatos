@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { createUser } from "../../Actions";
+import { useNavigate } from "react-router-dom";
 
+import './CSS/SingIn.css'
 
 const INITIAL_STATE = {
   nombre: "",
@@ -13,6 +15,7 @@ const CreateUserForm = () => {
   const [register, setRegister] = useState(INITIAL_STATE);
  
   const dispatch = useDispatch();
+  const navigate = useNavigate()
 
   const handleChange = (evt) => {
     const { name, value } = evt.currentTarget;
@@ -27,49 +30,57 @@ const CreateUserForm = () => {
     evt.preventDefault();
     dispatch(createUser(register));
     setRegister(INITIAL_STATE);
+    navigate("/home")
   };
 
   return (
-    <div >
-      <h3 >Registrate.</h3>
+    <div className="fondoSingIn" >
+      <div className="centro">
+
+      <h3 >Registrate</h3>
       <form onSubmit={handleSubmitRegister}>
-        <div>
-          <p >Nombre</p>
+        <div className="txtField">
           <input
             placeholder="Nombre"
             value={register.nombre}
             name="nombre"
             onChange={handleChange}
             type="text"
-          />
+            required
+            />
+            <span></span>
+          <label>Nombre</label>
         </div>
 
-        <div>
-          <p>Correo Electronico</p>
+        <div className="txtField">
           <input
             placeholder="Correo Electronico"
             value={register.email}
             name="email"
             onChange={handleChange}
             type="email"
-          />
+            required
+            />
+            <span></span>
+            <label>Correo Electronico</label>
         </div>
 
-        <div>
-          <p>Contraseña</p>
+        <div className="txtField">
           <input
             placeholder="Contraseña"
             value={register.contraseña}
             name="contraseña"
             onChange={handleChange}
             type="password"
-          />
+            required/>
+            <span></span>
+            <label>Contraseña</label>
         </div>
 
-        <div >
-          <button >Confirma registro</button>
-        </div>
+        <input type="submit" value="Ingresar" />
+        
       </form>
+            </div>
     </div>
 
   );

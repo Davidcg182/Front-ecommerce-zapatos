@@ -2,17 +2,21 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getZapas } from "../../Actions";
-import Cards from '../Card'
+import { getZapas, getOfertasZapas } from "../../Actions";
+// import Cards from '../Card'
+import CardOferta from '../CardsZapas/CardOferta'
 import Paginado from "../Paginado";
 import Carrusel from "../Carrusels/Carrusel";
-import NavBar from "../NavBar/NavBar";
+
 import '../CSS/Home.css'
 // import './Productos.css'
-import { Filters } from "../Filters/Filters";
+import '../CardsZapas/CardOferta.css'
+
+import { FiltersOfertas } from './filtrosOfertas/FiltrosOfertas'
 
 
-import { Navbar } from "react-bootstrap";
+
+
 
 
 
@@ -21,12 +25,12 @@ import { Navbar } from "react-bootstrap";
 export default function Ofertas(){ 
 
     const dispatch = useDispatch()
-    const allZapas = useSelector(state => state.zapas)
+    const allZapasoferta = useSelector(state => state.ofertas)
     const [currentPage, setCurrentPage] = useState(1)
     const [zapasPerPage, setZapasPerPage] = useState(10)
     const indexOfLastZapa = currentPage * zapasPerPage
     const indexOfFirstZapa = indexOfLastZapa - zapasPerPage
-    const currentZapas = allZapas.slice(indexOfFirstZapa, indexOfLastZapa)
+    const currentZapas = allZapasoferta.slice(indexOfFirstZapa, indexOfLastZapa)
 
 
     const paginado = (pageNumber) => {
@@ -34,27 +38,30 @@ export default function Ofertas(){
     }
 
     useEffect(() => {
-        dispatch(getZapas());
+        dispatch(getOfertasZapas());
     }, [dispatch])
+
+
 
     return (
 
         <div>
 
-<NavBar/>
 
-<Filters />
+
+<FiltersOfertas />
             <div className="cards">
                 {
                     currentZapas.map((e, i) => {
                         return (
-                            <div className="cartas" key={i}>
+                            <div className="cartanulo" key={i}>
                                 <Link to={'/zapatillas/' + e._id} className='cardLink'>
-                                    <Cards
+                                    <CardOferta
                                         marca={e.marca}
-                                        image={e.imagen1}
+                                        image={e.imagenes && e.imagenes[0]}
                                         modelo={e.modelo}
                                         precio={e.precio}
+                                    
                                         />
                                 </Link>
                             </div>
@@ -67,7 +74,7 @@ export default function Ofertas(){
 
             <Paginado
                 zapasPerPage={zapasPerPage}
-                allZapas={allZapas.length}
+                allZapas={allZapasoferta.length}
                 paginado={paginado}
             />
 

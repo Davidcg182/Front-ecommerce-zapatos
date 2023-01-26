@@ -1,7 +1,11 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import { getOrders } from '../../Actions';
+
+
+import './CSS/OrdersUser.css'
+
 
 export const OrdersUser = () => {
 
@@ -19,10 +23,10 @@ export const OrdersUser = () => {
     //console.log(ordersUser)
     return (
         <div>
-            <h1>Ordenes de compra</h1>
+            <h1 className='OrderUsertitulo'>Ordenes de compra</h1>
             {ordersUser?.map(e => {
                 return (
-                    <div>
+                    <div className='estrcOrderUsuario'>
                         <h2>Oden de compra No: {e._id}</h2>
                         <h3>Detalles de envio:</h3>
                         <p>Direccion: {e.direccionEntrega.direccion}</p>
@@ -37,6 +41,9 @@ export const OrdersUser = () => {
                                     <p>Modelo: {p.modelo}</p>
                                     <p>Precio: {p.precio}</p>
                                     <p>Cantidad: {p.cantidad}</p>
+                                    <Link to={`/reseña/${p.producto}`}>
+                                        <button>Agregar reseña</button>
+                                    </Link>
                                 </div>
                             )
                         })}

@@ -4,16 +4,16 @@ import ChatBot from 'react-simple-chatbot'
 import { ThemeProvider } from "styled-components";
 import Productos from "../Productos/Productos";
 import ListadoOfertas from "./Apartados/ApartadoOfertas";
-import Busqueda from "./Apartados/ApartadoBusqueda";
+
 import ListadoProductos from './Apartados/ApartadosProductos';
 
 
 const theme = {
-    background: '#f5f8fb',
+    background: '#666666',
     headerBgColor: '#643cf3',
     headerFontColor: '#fff',
     headerFontSize: '20px',
-    botBubbleColor: '#643cf3',
+    botBubbleColor: 'rgb(68, 178, 186)',
     botFontColor: '#fff',
     userBubbleColor: '#0c6098',
     userFontColor: '#fff',
@@ -51,7 +51,6 @@ export default class Contenido extends Component {
                         options: [
                             {value: "a", label: "Ver listado de Productos", trigger:"3a"},
                             {value: "b", label: "Ver listado de Ofertas", trigger:"3b"},
-                            {value: "c", label: "Buscar zapatilla:", trigger:"3c"},
                         ]
                     },                    
                     {
@@ -65,11 +64,6 @@ export default class Contenido extends Component {
                         component: <ListadoOfertas />,
                         asMessage: true,
                         trigger: "preguntaVuelta"
-                    }, {
-                        id: "3c",
-                        component: <Busqueda />,
-                        // message: "Hey, fuck you!",
-                        trigger: "preguntaVuelta",
                     },
                         
                     {

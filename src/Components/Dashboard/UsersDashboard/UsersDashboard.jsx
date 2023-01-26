@@ -6,7 +6,10 @@ import { getUsers, updateUserAdmin, updateUserEstado } from '../../../Actions';
 import PieChart from '../Charts/PieActiveUsers';
 import BarUsersOrders from '../Charts/BarUserOrders';
 
+import './UserDashboard.css'
+
 import style from "./UsersDashboard.module.css";
+import SidebarDashboard from '../SidebarDashboard/SidebarDashboard';
 
 export default function UserDashboard() {
 
@@ -85,14 +88,14 @@ export default function UserDashboard() {
     const _id = cellValues.row._id
     const estado1 = cellValues.row.estado
     dispatch(updateUserEstado({_id, estado1}))
-
+    window.location.reload()
   }
   const handleClickAdmin = (event, cellValues) => {
     //console.log(cellValues.row)
     const _id = cellValues.row._id
     const admin1 = cellValues.row.admin
     dispatch(updateUserAdmin({_id, admin1}))
-    // navigate("/dashboard/users")
+    window.location.reload()
   }
   const handleCellClick = (param, event) => {
     event.stopPropagation();
@@ -109,10 +112,11 @@ export default function UserDashboard() {
   }, []);
 
 
+
   return (
-    <div >
-      <div >
-        {/* <SidebarDashboard /> */}
+    <div  className='estrucUserDash'>
+      <SidebarDashboard />
+      <div className='listadoUsers'>
         {users?.length > 0 ? (
           <>
             <h1>USUARIOS REGISTRADOS</h1>

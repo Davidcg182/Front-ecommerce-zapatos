@@ -4,6 +4,7 @@
     display: flex;
     flex-wrap: wrap;
     margin-top: 1cm;
+    
 }
 .list{
     list-style: none;
@@ -28,7 +29,7 @@
     background:#2d5597;
 }
 .logo{
-    margin-left: 1cm;
+    margin-left: 2cm;
 }
 .cardLink{
     text-decoration: none;

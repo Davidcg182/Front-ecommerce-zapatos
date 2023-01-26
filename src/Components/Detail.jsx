@@ -1,16 +1,19 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { getZapaById } from '../Actions';
 import Carousel from 'react-bootstrap/Carousel';
-import NavBar from './NavBar/NavBar';
 import Button from 'react-bootstrap/Button';
 import { addToCart } from '../Actions';
 import { payOneZapa } from '../Actions';
 import Footer from './Footer/Footer';
 import swal from 'sweetalert';
 import { addToFav, removeToFav } from '../Actions';
+import Reviews from './Reviews/Reviews';
+import { addFavorites } from '../Actions';
+
+
 
 
 
@@ -28,15 +31,20 @@ import CarruselPromo from './Carrusels/CarruselPromo';
 
 
 export default function Details() {
-
+   const cart = useSelector(state => state.cart)
    const { id } = useParams()
    const dispatch = useDispatch()
    const zapa = useSelector(state => state.detail)
    // console.log("ZAPA," , zapa);
+   const user = useSelector(state => state.user)
 
    useState(() => {
       dispatch(getZapaById(id))
-   }, [id])
+   }, [id, zapa]);
+
+   useEffect(() => {
+      localStorage.setItem("cartItem", JSON.stringify(cart))
+   }, [cart])
 
 
    const handleToCart = (e) => {
@@ -46,23 +54,27 @@ export default function Details() {
       swal({
          icon: "success",
          title: 'Producto añadido con éxito!'
-       });
+      });
    }
    const handleToFavorite = (e) => {
       e.preventDefault();
-      //console.log(id)
-      dispatch(addToFav(id))
+      const idproduct = id;
+      const iduser = user._id;
+      dispatch(addFavorites({ idproduct, iduser }));
       swal({
          icon: "success",
          title: 'Producto agregado a la lista de favoritos!'
-       });
+      });
    }
+
+
+
+   const Dinero = zapa.oferta ? (zapa.precio / 2) : zapa.precio
 
    return (
 
 
       <div>
-         <NavBar />
          <div className="container">
             <div className="card">
                <div className="container-fliud">
@@ -107,7 +119,22 @@ export default function Details() {
                      <div className="details col-md-6">
                         <h3 className="product-title">{zapa.marca}</h3>
                         <p className="product-description">{zapa.modelo}</p>
-                        <h4 className="price">PRECIO: <span>${zapa.precio}</span></h4>
+
+                        {zapa.oferta ? (
+                           <>
+                              <h4 className="precioprev">PRECIO: <span>${zapa.precio}</span></h4>
+                              <h4 className="price">OFERTA: <span>${Dinero}</span></h4>
+                           </>
+                        ) :
+                           (
+                              <h4 className="price">PRECIO: <span>${zapa.precio}</span></h4>
+
+                           )
+
+                        }
+
+                        <h6 className="price">En Stock: <span>{zapa.inventario}</span></h6>
+
                         <h5>TALLES:
 
                            <select class="sizes">
@@ -121,11 +148,13 @@ export default function Details() {
                            </select>
                         </h5>
                         <div class="action">
-                           <Button value='add' className='btnCart' variant="primary" onClick={handleToFavorite}>❤️</Button>
-                           <Button variant="primary">Comprar</Button>
+                           {Object.entries(user).length > 0 ?
+                              <Button value='add' className='btnCart' variant="primary" onClick={handleToFavorite}>❤️</Button> :
+                              <Button value='add' className='btnCart' variant="primary" disabled>❤️</Button>}
+                           {/* <Button variant="primary">Comprar</Button> */}
                            <Button value='add' className='btnCart' variant="primary" onClick={handleToCart}
                            >Añadir al carrito</Button>
-                                                                                                               
+
 
                         </div>
                      </div>
@@ -179,8 +208,10 @@ export default function Details() {
         
       </Carousel.Item>
     </Carousel> */}
+            <div>
+               <Reviews id={id} />
+            </div>
          </div>
-         <Footer/>  
       </div>
 
    );

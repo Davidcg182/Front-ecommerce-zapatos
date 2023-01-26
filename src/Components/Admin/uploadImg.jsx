@@ -1,10 +1,16 @@
 import React, { useState } from "react";
 import axios from "axios";
+import Formulario from "../Formulario/Formulario";
+import Spinner from 'react-bootstrap/Spinner';
+import swal from 'sweetalert';
+import './Cloudinary.css'
+import { useNavigate } from "react-router-dom";
 
 export default function UploadImg() {
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false)
   const [url, setUrl] = useState("");
-
+  const navigate = useNavigate()
 
   // converBase64 => es una función que convierte una imagen en una serie de digitos y letras 
   // para que lo pueda leer
@@ -18,6 +24,7 @@ export default function UploadImg() {
       };
 
       fileReader.onerror = (error) => {
+        
         reject(error);
       };
     });
@@ -74,10 +81,19 @@ export default function UploadImg() {
       .post("http://localhost:3001/uploadImage", { image: base64 })
       .then((res) => {
         setUrl(res.data);
-        alert("Imagen subida con exito :)");
+        swal({
+          icon: "success",
+          title: 'Imagen agregada!'
+        });
       })
       .then(() => setLoading(false))
-      .catch(console.log);
+      .catch((err) =>{
+        console.log(err)
+        setError(true)
+        setLoading(false)
+        navigate("/uploadImg")
+        alert("Hubo un problema, al intentar subir la imagen :(");
+      });
   }
   //uploadMultipleImages => función que se ejecuta si subis mas de una imagen =) (encaragada de hacer
   // el .post)
@@ -87,13 +103,22 @@ export default function UploadImg() {
       .post("http://localhost:3001/uploadMultipleImages", { images })
       .then((res) => {
         setUrl(res.data);
-        alert("Imagenes subidas con exito :)");
+        swal({
+          icon: "success",
+          title: 'Imagenes agregadas!'
+        });
       })
       .then(() => setLoading(false))
-      .catch(console.log);
+      .catch((err) =>{
+        console.log(err)
+        setError(true)
+        setLoading(false)
+        navigate("/uploadImg")
+        alert("Hubo un problema, al intentar subir la imagen :(");
+      });
   }
 
- //uploadImage => funcion que termina por convertir toda la información y subirla =)
+  //uploadImage => funcion que termina por convertir toda la información y subirla =)
   const uploadImage = async (event) => {
     const files = event.target.files;
     console.log(files.length);
@@ -114,25 +139,37 @@ export default function UploadImg() {
 
   return (
     <div>
-      <div>
-        {url && (
-          <div>
-            Accede a el link de tu img = {" "}
-            <a href={url} target="_blank" rel="noopener noreferrer">
-              {url}
-            </a>
-          </div>
-        )}
+
+      
+      <div >
+
+        <div>
+          {url && <Formulario img={url} />}
+        </div>
+
+        <div>
+          {loading ? (
+            <div className="spinner">
+              <Spinner animation="border" role="status">
+                <span className="visually-hidden">Loading...</span>
+              </Spinner>
+            </div>
+          ) : (
+            <div>
+              {!url && (
+              <div>
+                <h3 className="titleimg">Subir imágenes (3 máx.) </h3>
+                  <div className="cloudinary">
+                    <UploadInput className='uploudinput' />
+                  </div>
+              </div>)}
+            </div>
+          )}
+        </div>
+
       </div>
-      <div>
-        {loading ? (
-          <div className="flex items-center justify-center">
-            <h1>Cargando...</h1>
-          </div>
-        ) : (
-          <UploadInput />
-        )}
-      </div>
+
     </div>
   );
 }
+                
