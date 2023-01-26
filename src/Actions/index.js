@@ -79,7 +79,7 @@ export function addToCart(id) {
             type: "ADD_TO_CART",
             payload: product.data,
         });
-        //localStorage.setItem("cart", JSON.stringify(getState()))
+       // localStorage.setItem("cart", JSON.stringify(getState()))
     }
 };
 

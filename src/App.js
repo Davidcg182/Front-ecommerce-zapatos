@@ -32,6 +32,7 @@ import { createUser } from './Actions';
 import { useAuth0 } from '@auth0/auth0-react';
 import ReviewForm from './Components/Reviews/ReviewForm';
 import NavBar from './Components/NavBar/NavBar';
+import PostCompra from './Components/PostCompra/PostCompra';
 
 import './App.css'
 import Footer from './Components/Footer/Footer';
@@ -93,6 +94,7 @@ function App() {
           <Route Route exact path='/favoritos' element={<Favorito />}></Route>
           <Route Route exact path='/compras' element={<ShopCart />}></Route>
           <Route exact path='/login/google' element={<LoginGoogle />} />
+          <Route exact path='/compraexitosa' element={<PostCompra/>} />
           <Route exact path='/' element={<LandingPage />} />
           <Route exact path='/crear' element={<UploadImg />} />
           <Route path='/Home' element={<Home />} />
