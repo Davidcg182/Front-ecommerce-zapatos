@@ -46,31 +46,31 @@ function App() {
    user && dispatch(createUser({ email: user?.email, nombre: user?.given_name, contraseña: 123456 }))
   }, [user]);
 
-  useEffect(() => {
-    const dataUser = JSON.parse(window.localStorage.getItem("user"));
-    const cart = window.localStorage.getItem("cart")
-      ? JSON.parse(window.localStorage.getItem("cart"))
-      : null;
+  // useEffect(() => {
+  //   const dataUser = JSON.parse(window.localStorage.getItem("user"));
+  //   const cart = window.localStorage.getItem("cart")
+  //     ? JSON.parse(window.localStorage.getItem("cart"))
+  //     : null;
 
-    //----------------------------------------
+  //   //----------------------------------------
 
-    if (!(cart === null)) {
-      if (cart.amount) {
-        dispatch(updateRedux([cart]));
-      } else {
-        const savecart = [];
-        Object.entries(cart).map(e => {
-          savecart.push(e[1])
-        })
-        dispatch(updateRedux(savecart));
-      }
-    }
-    !dataUser
-      ? dispatch(postLoginUserAuth0({ email: user?.email, name: user?.name }))
-      : dispatch(
-          postLoginUserAuth0({ email: dataUser.email, name: dataUser.name })
-        );
-  }, [user]);
+  //   if (!(cart === null)) {
+  //     if (cart.amount) {
+  //       dispatch(updateRedux([cart]));
+  //     } else {
+  //       const savecart = [];
+  //       Object.entries(cart).map(e => {
+  //         savecart.push(e[1])
+  //       })
+  //       dispatch(updateRedux(savecart));
+  //     }
+  //   }
+  //   !dataUser
+  //     ? dispatch(postLoginUserAuth0({ email: user?.email, name: user?.name }))
+  //     : dispatch(
+  //         postLoginUserAuth0({ email: dataUser.email, name: dataUser.name })
+  //       );
+  // }, [user]);
 
   return (
     <BrowserRouter>

@@ -42,9 +42,9 @@ export default function Details() {
       dispatch(getZapaById(id))
    }, [id, zapa]);
 
-   useEffect(() => {
-      localStorage.setItem("cartItem", JSON.stringify(cart))
-   }, [cart])
+   // useEffect(() => {
+   //    localStorage.setItem("cartItem", JSON.stringify(cart))
+   // }, [cart])
 
 
    const handleToCart = (e) => {

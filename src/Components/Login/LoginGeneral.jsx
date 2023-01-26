@@ -8,7 +8,7 @@ import "./CSS/LoginGeneral.css";
 
 export const LoginGeneral = () => {
 
-  window.localStorage.removeItem("user");
+  //window.localStorage.removeItem("user");
   
   const dispatch = useDispatch();
   const navigate = useNavigate();

@@ -51,7 +51,7 @@ function rootReducer(state = initialState, action) {
       const item1 = {...itemsave};
       const item3 = state.cart;
       const save = state.cart.length === 0? {...item1} : {...item3, item1} ;
-      window.localStorage.setItem("cart", JSON.stringify(save))
+      //window.localStorage.setItem("cart", JSON.stringify(save))
       const item = state.cart.find((item) =>
         item._id === action.payload._id ? true : false
       );
@@ -69,7 +69,7 @@ function rootReducer(state = initialState, action) {
 
     case "REMOVE_TO_CART":
       const cartFilter = state.cart.filter((e) => e._id !== action.payload);
-      window.localStorage.setItem("cart", JSON.stringify(cartFilter))
+     // window.localStorage.setItem("cart", JSON.stringify(cartFilter))
       return {
         ...state,
         cart: cartFilter,
@@ -108,12 +108,12 @@ function rootReducer(state = initialState, action) {
       };
 
     case "CREATE_USER":
-      window.localStorage.setItem("user", JSON.stringify(
-        {
-          _id: action.payload._id,
-          email: action.payload.email,
-          contraseña: action.payload.contraseña
-        }))
+    //  window.localStorage.setItem("user", JSON.stringify(
+        // {
+        //   _id: action.payload._id,
+        //   email: action.payload.email,
+        //   contraseña: action.payload.contraseña
+        // }))
       return {
         ...state,
         user: action.payload
@@ -124,12 +124,12 @@ function rootReducer(state = initialState, action) {
         users: action.payload,
       };
     case "LOG_USER":
-      window.localStorage.setItem("user", JSON.stringify(
-        {
-          _id: action.payload._id,
-          email: action.payload.email,
-          contraseña: action.payload.contraseña
-        }))
+      // window.localStorage.setItem("user", JSON.stringify(
+      //   {
+      //     _id: action.payload._id,
+      //     email: action.payload.email,
+      //     contraseña: action.payload.contraseña
+      //   }))
       return {
         ...state,
         userLog: { userInfo: action.payload },
