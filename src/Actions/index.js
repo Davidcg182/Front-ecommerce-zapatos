@@ -1,11 +1,12 @@
 import axios from 'axios';
 import swal from 'sweetalert';
 
-const URL = "http://henry-pf-backend-production.up.railway.app/"
+//const URL = "http://henry-pf-backend-production.up.railway.app/"
 
 export function getZapas() {
     return async function (dispatch) {
-        var json = await axios.get(`${URL}productos/zapatillas`)
+        //var json = await axios.get(`${URL}productos/zapatillas`)
+        var json = await axios.get(`productos/zapatillas`)
         
         return dispatch({
             type: 'GET_ZAPAS',
@@ -81,7 +82,7 @@ export function addToCart(id) {
             type: "ADD_TO_CART",
             payload: product.data,
         });
-       // localStorage.setItem("cart", JSON.stringify(getState()))
+        //localStorage.setItem("cart", JSON.stringify(getState()))
     }
 };
 
@@ -91,7 +92,7 @@ export function removeToCart(id) {
             type: "REMOVE_TO_CART",
             payload: id
         });
-        //localStorage.setItem("cart", JSON.stringify(getState()))
+       // localStorage.setItem("cart", JSON.stringify(getState()))
     }
 };
 
