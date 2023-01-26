@@ -20,7 +20,7 @@ export default function CarruselMasV(){
   const indexOfLastZapa = currentPage * zapasPerPage;
   const indexOfFirstZapa = indexOfLastZapa - zapasPerPage;
   const currentZapas = allZapas.slice(indexOfFirstZapa, indexOfLastZapa);
-  console.log(currentZapas, 'zapas')
+ // console.log(currentZapas, 'zapas')
 
   return(
 <div>

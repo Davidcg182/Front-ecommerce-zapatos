@@ -188,7 +188,7 @@ export function singleUser(id) {
     return async function (dispatch) {
         try {
             const { data } = await axios.get(`usuarios/${id}`)
-            console.log(data)
+           // console.log(data)
             dispatch({
                 type: "SINGLE_USER",
                 payload: data
