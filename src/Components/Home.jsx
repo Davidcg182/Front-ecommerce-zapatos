@@ -38,7 +38,7 @@ export default function Home() {
         dispatch(getZapas());
     }, [dispatch])
 
-    console.log(allZapas, 'asd')
+   // console.log(allZapas, 'asd')
 
     return (
 

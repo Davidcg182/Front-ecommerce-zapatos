@@ -18,10 +18,12 @@ export const ShopCart = ({ history }) => {
   // let articulosTotales = 0;
 
   const handlePay = () => {
-    console.log("ESTO TIENE DETAIL ", cart);
+    //console.log("ESTO TIENE DETAIL ", cart);
     // dispatch(payOneZapa(zapa))
+    //http://henry-pf-backend-production.up.railway.app/
     axios
-      .post("http://localhost:3001/payment", cart)
+      //.post("http://localhost:3001/payment", cart)
+      .post("http://henry-pf-backend-production.up.railway.app/payment", cart)
       .then(
         (res) => (window.location.href = res.data.response.body.init_point)
       );
