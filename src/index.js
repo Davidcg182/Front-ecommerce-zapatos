@@ -19,8 +19,8 @@ render(
 <Provider store={store}  >
 <React.StrictMode>
   <Auth0Provider
-  domain="henry-pg-2023.us.auth0.com"
-  clientId="cXpvK53yrkIiTcA6dlMhNoHdI6WoqnkQ"
+  domain="ndev-3ossxtz5x7gdz7wj.us.auth0.com"
+  clientId="TgHHiXRYXfAsLGiykaAqt5reE43gZir6"
   redirectUri={window.location.origin }
   > 
 <App />
