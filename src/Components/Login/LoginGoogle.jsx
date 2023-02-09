@@ -6,7 +6,6 @@ const LoginGoogle = () => {
 
     const handleLogOut = () => {
         logout({ returnTo: window.location.origin });
-        window.rage.clear();
     }
 
     const { isAuthenticated, logout, user } = useAuth0();

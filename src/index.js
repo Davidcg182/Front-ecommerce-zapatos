@@ -9,17 +9,14 @@ import { Auth0Provider } from "@auth0/auth0-react";
 import 'bootstrap/dist/css/bootstrap.css'; 
 import 'react-bootstrap-range-slider/dist/react-bootstrap-range-slider.css';
 import { render } from "react-dom";
-import axios from "axios"
 
-//axios.defaults.baseURL = "http://localhost:3001/"
-axios.defaults.baseURL = "https://henry-pf-backend-production.up.railway.app/"
 
 render(
 <Provider store={store}  >
 <React.StrictMode>
   <Auth0Provider
-  domain="dev-3ossxtz5x7gdz7wj.us.auth0.com"
-  clientId="TgHHiXRYXfAsLGiykaAqt5reE43gZir6"
+  domain="henry-pg-2023.us.auth0.com"
+  clientId="cXpvK53yrkIiTcA6dlMhNoHdI6WoqnkQ"
   redirectUri={window.location.origin }
   > 
 <App />

@@ -104,7 +104,7 @@ export const Filters = () => {
                 setTitleDropTalle("Talle: Cualquiera")
                 break;
         }
-        setValue({ ...value, talle: e.target.value })
+        setValue({ ...value, talla: e.target.value })
     };
 
     const filterPrecio = (e) => {

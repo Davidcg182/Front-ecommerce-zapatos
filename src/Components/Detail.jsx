@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { getZapaById } from '../Actions';
@@ -31,26 +31,32 @@ import CarruselPromo from './Carrusels/CarruselPromo';
 
 
 export default function Details() {
-   const cart = useSelector(state => state.cart)
+
    const { id } = useParams()
    const dispatch = useDispatch()
    const zapa = useSelector(state => state.detail)
    // console.log("ZAPA," , zapa);
    const user = useSelector(state => state.user)
 
+   const carrito = useSelector(state => state.cart);
+   const saveLoca = () => {
+      localStorage.setItem("carrito", JSON.stringify(carrito));
+      }
+
+      const prueba123 = localStorage.getItem('user');
+      const salio123 = JSON.parse(prueba123);
+
+      
    useState(() => {
       dispatch(getZapaById(id))
-   }, [id, zapa]);
-
-   // useEffect(() => {
-   //    localStorage.setItem("cartItem", JSON.stringify(cart))
-   // }, [cart])
+   }, [id, zapa])
 
 
    const handleToCart = (e) => {
       e.preventDefault();
       //console.log(id)
-      dispatch(addToCart(id))
+      dispatch(addToCart(id));
+      saveLoca()
       swal({
          icon: "success",
          title: 'Producto añadido con éxito!'

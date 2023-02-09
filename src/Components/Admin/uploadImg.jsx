@@ -24,7 +24,7 @@ export default function UploadImg() {
       };
 
       fileReader.onerror = (error) => {
-
+        
         reject(error);
       };
     });
@@ -73,14 +73,12 @@ export default function UploadImg() {
     );
   }
 
-  //http://henry-pf-backend-production.up.railway.app/
   //uploadSingleImage => función que se ejecuta si cargas una sola imagen(encaragada de hacer
   // el .post)
   function uploadSingleImage(base64) {
     setLoading(true);
     axios
-      .post("https://henry-pf-backend-production.up.railway.app/uploadImage", { image: base64 })
-      // .post("http://localhost:3001/uploadImage", { image: base64 })
+      .post("http://localhost:3001/uploadImage", { image: base64 })
       .then((res) => {
         setUrl(res.data);
         swal({
@@ -89,7 +87,7 @@ export default function UploadImg() {
         });
       })
       .then(() => setLoading(false))
-      .catch((err) => {
+      .catch((err) =>{
         console.log(err)
         setError(true)
         setLoading(false)
@@ -102,8 +100,7 @@ export default function UploadImg() {
   function uploadMultipleImages(images) {
     setLoading(true);
     axios
-      .post("https://henry-pf-backend-production.up.railway.app/uploadMultipleImages", { images })
-      //.post("http://localhost:3001/uploadMultipleImages", { images })
+      .post("http://localhost:3001/uploadMultipleImages", { images })
       .then((res) => {
         setUrl(res.data);
         swal({
@@ -112,7 +109,7 @@ export default function UploadImg() {
         });
       })
       .then(() => setLoading(false))
-      .catch((err) => {
+      .catch((err) =>{
         console.log(err)
         setError(true)
         setLoading(false)
@@ -143,7 +140,7 @@ export default function UploadImg() {
   return (
     <div>
 
-
+      
       <div >
 
         <div>
@@ -160,12 +157,12 @@ export default function UploadImg() {
           ) : (
             <div>
               {!url && (
-                <div>
-                  <h3 className="titleimg">Subir imágenes (3 máx.) </h3>
+              <div>
+                <h3 className="titleimg">Subir imágenes (3 máx.) </h3>
                   <div className="cloudinary">
                     <UploadInput className='uploudinput' />
                   </div>
-                </div>)}
+              </div>)}
             </div>
           )}
         </div>
@@ -175,4 +172,4 @@ export default function UploadImg() {
     </div>
   );
 }
-
+                

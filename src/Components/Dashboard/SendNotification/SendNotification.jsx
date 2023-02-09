@@ -11,7 +11,7 @@ export default function SendNotification () {
     const [socket, setSocket] = useState(null)
 
     useEffect(() => {
-        setSocket(io("https://henry-pf-backend-production.up.railway.app"))
+        setSocket(io("http://localhost:5000"))
     },[])
 
     const handleInputChange = function(e){
